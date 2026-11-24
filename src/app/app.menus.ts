@@ -5,6 +5,8 @@
  *
  * http://www.dspace.org/license/
  */
+// SACEIT: config-driven admin links (src/themes/saceit/…/saceit-links.menu.ts)
+import { SaceitLinksMenuProvider } from '../themes/saceit/app/shared/menu/providers/saceit-links.menu';
 import { buildMenuStructure } from './shared/menu/menu.structure';
 import { MenuID } from './shared/menu/menu-id.model';
 import { MenuRoute } from './shared/menu/menu-route.model';
@@ -80,6 +82,7 @@ export const MENUS = buildMenuStructure({
     AuditOverviewMenuProvider,
     EditCMSMetadataMenuProvider,
     EditUserAgreementMenuProvider,
+    SaceitLinksMenuProvider,
   ],
   [MenuID.DSO_EDIT]: [
     DsoOptionMenuProvider.withSubs([

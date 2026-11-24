@@ -22,6 +22,12 @@ Deployed from [kuzik/saceit-cluster-deploy](https://github.com/kuzik/saceit-clus
 - Runtime settings (REST URL, languages, …) are NOT baked in here: they come from
   `config.prod.yml` in saceit-cluster-deploy, mounted into the container.
 - Upstream workflows are disabled in this fork (`gh workflow disable`), not deleted.
+- Upstream files we had to touch (the only expected merge conflicts): `angular.json` (theme
+  bundle), `src/themes/eager-themes-components.ts`, `src/app/app.menus.ts` (one import + one
+  line: `SaceitLinksMenuProvider` in `MenuID.ADMIN`).
+- Admin sidebar links (`src/themes/saceit/app/shared/menu/providers/saceit-links.menu.ts`):
+  the code only renders them; text/target/icon come from `saceit.adminMenuLinks` in
+  `config.prod.yml`, shown to site and collection admins. Nothing configured → nothing shown.
 
 ## Protection (GitHub settings, 2026-11-24)
 
