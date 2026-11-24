@@ -1,0 +1,63 @@
+# SACEIT: build the production UI image from this fork and push it to GHCR.
+#
+#   git tag v10.1-saceit.3 && git push origin v10.1-saceit.3
+#   → ghcr.io/kuzik/dspace-angular:10.1-saceit.3
+#
+# The image is upstream's Dockerfile.dist (production build + PM2) with our
+# theme in it. The version that runs is pinned in kuzik/saceit-cluster-deploy
+# (services/dspace/versions.yml) — this workflow only publishes. SACEIT.md has
+# the branch/upgrade rules. Upstream's own workflows are disabled in this fork.
+
+name: SACEIT UI image
+
+on:
+  push:
+    tags: ["v*-saceit.*"]
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: saceit-image-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Image tag from the git tag (v10.1-saceit.3 → 10.1-saceit.3)
+        id: tag
+        run: |
+          t="${GITHUB_REF_NAME#v}"
+          [[ $t =~ ^[0-9]+\.[0-9]+(\.[0-9]+)?-saceit\.[0-9]+$ ]] || { echo "::error::tag must be v<dspace version>-saceit.<n>, got $GITHUB_REF_NAME"; exit 1; }
+          echo "tag=$t" >> "$GITHUB_OUTPUT"
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Dockerfile.dist sets NODE_OPTIONS=--max_old_space_size=4096 for the
+      # Angular production build; the hosted runner has 16 GB.
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile.dist
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/dspace-angular:${{ steps.tag.outputs.tag }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.version=${{ steps.tag.outputs.tag }}
+            org.opencontainers.image.description=DSpace Angular UI with the SACEIT theme (er.saceit.org.ua)
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Digest
+        run: echo "ghcr.io/${{ github.repository_owner }}/dspace-angular:${{ steps.tag.outputs.tag }}" >> "$GITHUB_STEP_SUMMARY"
