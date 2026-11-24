@@ -1,0 +1,35 @@
+// SACEIT theme: CSS variables (DSpace's are in src/styles/_custom_variables.scss)
+
+:root {
+  // header = brand row (seal + names + tools); the menu is a second row below it
+  --ds-header-logo-height: 56px;
+  @include media-breakpoint-down(sm) {
+    --ds-header-logo-height: 44px;
+  }
+
+  --ds-header-navbar-border-bottom-height: 3px;
+  --ds-expandable-navbar-border-top-color: #{$saceit-menu-bg};
+  --ds-expandable-navbar-border-top-height: 0;
+  --ds-expandable-navbar-padding-top: 0;
+
+  --ds-footer-bg: #{$saceit-navy-deep};
+  --ds-footer-border: 0;
+
+  --ds-home-news-background-color: #{$saceit-navy};
+  --ds-breadcrumb-bg: #{$saceit-ground};
+
+  --ds-banner-text-background: rgba(20, 18, 79, 0.6);
+  --ds-banner-background-gradient-width: 300px;
+
+  --ds-item-page-img-field-default-inline-height: 24px;
+  --ds-item-page-img-field-ror-inline-height: var(--ds-item-page-img-field-default-inline-height);
+
+  // brand, for the theme's own components
+  --saceit-navy: #{$saceit-navy};
+  --saceit-navy-deep: #{$saceit-navy-deep};
+  --saceit-accent: #{$saceit-accent};
+  --saceit-muted: #{$saceit-muted};
+  --saceit-tint: #{$saceit-tint};
+  --saceit-on-dark-muted: #d9d8f2;
+  --saceit-font-display: 'Unbounded', 'Golos Text', system-ui, sans-serif;
+}

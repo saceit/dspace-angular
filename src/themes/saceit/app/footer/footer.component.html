@@ -1,0 +1,85 @@
+<footer>
+  <div class="saceit-footer">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-6">
+          <a class="saceit-footer__identity" href="https://saceit.org.ua/">
+            <img class="saceit-footer__logo" src="assets/saceit/images/saceit-logo.svg" width="64" height="64" alt=""/>
+            <span class="saceit-footer__name">Самбірський фаховий коледж економіки та інформаційних технологій</span>
+          </a>
+          <p class="saceit-footer__about">Електронний репозиторій коледжу — відкритий доступ до навчальних, методичних і наукових матеріалів викладачів та здобувачів освіти.</p>
+        </div>
+        <nav class="col-6 col-lg-3" aria-label="Репозиторій">
+          <h2 class="saceit-footer__title">Репозиторій</h2>
+          <ul class="list-unstyled mb-0">
+            <li><a routerLink="/community-list">Фонди та колекції</a></li>
+            <li><a routerLink="/browse/dateissued">За датою видання</a></li>
+            <li><a routerLink="/browse/author">За автором</a></li>
+            <li><a routerLink="/search">Пошук</a></li>
+          </ul>
+        </nav>
+        <nav class="col-6 col-lg-3" aria-label="Коледж">
+          <h2 class="saceit-footer__title">Коледж</h2>
+          <ul class="list-unstyled mb-0">
+            <li><a href="https://saceit.org.ua/">Сайт коледжу</a></li>
+            <li><a href="https://www.facebook.com/saceit.org.ua/" target="_blank" rel="noopener">Facebook</a></li>
+            <li><a href="https://www.instagram.com/_saceit_/" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://youtube.com/@saceit1" target="_blank" rel="noopener">YouTube</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- Copyright -->
+  <div class="bottom-footer p-1 d-flex flex-column flex-md-row justify-content-center align-items-center text-white">
+    <div class="content-container align-self-center">
+      <p class="m-0">
+        <a class="text-white"
+        href="https://www.dspace.org/" role="link" tabindex="0">{{ 'footer.link.dspace' | translate}}</a>
+        {{ 'footer.copyright' | translate:{year: dateObj | date:'y'} }}
+        <a class="text-white"
+        href="https://www.lyrasis.org/" role="link" tabindex="0">{{ 'footer.link.lyrasis' | translate}}</a>
+      </p>
+      <ul class="footer-info list-unstyled d-flex justify-content-center mb-0">
+        @if (showCookieSettings) {
+        <li>
+          <button class="btn btn-link text-white" type="button" (click)="openCookieSettings()" role="button" tabindex="0">
+            {{ 'footer.link.cookies' | translate}}
+          </button>
+        </li>
+        }
+        <li>
+          <a class="btn text-white"
+             routerLink="info/accessibility" role="link" tabindex="0">{{ 'footer.link.accessibility' | translate }}</a>
+        </li>
+        @if (showPrivacyPolicy) {
+          <li>
+            <a class="btn text-white"
+            routerLink="info/privacy" role="link" tabindex="0">{{ 'footer.link.privacy-policy' | translate}}</a>
+          </li>
+        }
+        @if (showEndUserAgreement) {
+          <li>
+            <a class="btn text-white"
+            routerLink="info/end-user-agreement" role="link" tabindex="0">{{ 'footer.link.end-user-agreement' | translate}}</a>
+          </li>
+        }
+        @if (showSendFeedback$ | async) {
+          <li>
+            <a class="btn text-white"
+            routerLink="info/feedback" role="link" tabindex="0">{{ 'footer.link.feedback' | translate}}</a>
+          </li>
+        }
+      </ul>
+    </div>
+    @if (coarLdnEnabled$ | async) {
+      <div class="notify-enabled text-white align-self-end">
+        <a class="coar-notify-support-route" routerLink="info/coar-notify-support" role="link" tabindex="0">
+          <img class="n-coar" src="assets/images/n-coar.svg" [attr.alt]="'menu.header.image.logo' | translate" />
+          {{ 'footer.link.coar-notify-support' | translate }}
+        </a>
+      </div>
+    }
+  </div>
+  <!-- Copyright -->
+</footer>

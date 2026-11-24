@@ -1,0 +1,36 @@
+// SACEIT home intro: navy band with the accent rule, as the college site's hero
+:host {
+  display: block;
+}
+
+.saceit-news {
+  background-color: var(--ds-home-news-background-color);
+  color: #fff;
+  padding: 3rem 0 2.75rem;
+  margin-top: calc(-1 * var(--ds-content-spacing, 0px));
+  margin-bottom: 2rem;
+  border-bottom: 4px solid var(--saceit-accent);
+
+  a {
+    color: var(--ds-home-news-link-color);
+  }
+}
+
+.saceit-news__kicker {
+  color: var(--saceit-on-dark-muted);
+  font-size: 0.9375rem;
+  margin-bottom: 0.5rem;
+}
+
+.saceit-news__title {
+  font-family: var(--saceit-font-display);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  margin-bottom: 1rem;
+}
+
+.saceit-news__lead {
+  max-width: 46rem;
+  font-size: 1.0625rem;
+  margin-bottom: 0;
+}

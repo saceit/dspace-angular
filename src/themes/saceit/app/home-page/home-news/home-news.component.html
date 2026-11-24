@@ -1,0 +1,14 @@
+<div class="saceit-news">
+  <div class="container">
+    @if (homeNewsMetadataValue$ | async; as homeNewsMetadataValue) {
+      <ds-markdown-viewer [value]="homeNewsMetadataValue"></ds-markdown-viewer>
+    }
+    @else {
+      <p class="saceit-news__kicker">Самбірський фаховий коледж економіки та інформаційних технологій</p>
+      <h1 class="saceit-news__title">Електронний репозиторій</h1>
+      <p class="saceit-news__lead">Відкритий доступ до навчальних, методичних і наукових матеріалів
+        викладачів та здобувачів освіти коледжу: посібники, методичні вказівки, кваліфікаційні
+        та наукові роботи.</p>
+    }
+  </div>
+</div>

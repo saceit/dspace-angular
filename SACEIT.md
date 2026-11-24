@@ -23,6 +23,20 @@ Deployed from [kuzik/saceit-cluster-deploy](https://github.com/kuzik/saceit-clus
   `config.prod.yml` in saceit-cluster-deploy, mounted into the container.
 - Upstream workflows are disabled in this fork (`gh workflow disable`), not deleted.
 
+## Protection (GitHub settings, 2026-11-24)
+
+The repository is public (a fork of a public repo cannot be private), so:
+
+| What | Rule |
+|---|---|
+| branch `saceit` (default) | ruleset "protect saceit branch": no deletion, no force push; changes only through a PR with 1 approval (stale approvals dismissed, the last pusher cannot approve their own push). Org/repo admins may bypass. |
+| tags `v*` | ruleset "release tags: admins only": create/move/delete — admins only (a tag builds a release image) |
+| Actions | workflows from fork PRs need approval for **every** outside contributor; `GITHUB_TOKEN` read-only by default (`saceit-image.yml` asks for `packages: write` itself and runs only on tags) |
+
+Last line of defence: production runs only the image pinned in
+saceit-cluster-deploy `services/dspace/versions.yml` — nothing merged or tagged
+here reaches er.saceit.org.ua until that pin is changed there.
+
 ## Upgrade to a new DSpace release
 
 ```bash
